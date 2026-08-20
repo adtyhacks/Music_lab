@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <style>
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(190, 29, 29, 0.7);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(190, 29, 29, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor.active, 
+        .cursor-follower.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(236, 192, 203, 0.5);
+        }
+
+        .cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: rgba(74, 43, 10, 0.8);
+        }
+
+        /* Hide cursor on mobile */
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            * {
+                cursor: default !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+  <section>
+    <form autocomplete="off" class="form" action="{{ url_for('register') }}" method="POST">
+      <p class="title">Register</p>
+      <div class="form-group">
+        <label>
+          <input type="text" name="name" required>
+          <span>Name</span>
+        </label>
+        <label>
+          <input type="number" name="age" min="1" max="200" required>
+          <span>Age</span>
+        </label>
+        <label>
+          <select name="gender" class="gender-select" required>
+            <option value="" disabled selected>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Male">Female</option>
+            </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>
+          <span>
+          <select id="level1" name="type" class="type-select" required>
+            <option value="" disabled selected>Type</option>
+            <option value="Vocalist">Vocalist</option>
+            <option value="Instrumentalist">Instrumentalist</option>
+            </select>
+            </span>
+        </label>
+        <label>
+          <select id="level2" name="genre" class="type-select" required>
+            <option value="" disabled selected>Genre</option>
+            </select>
+        </label>
+        <label>
+          <select name="instrument" class="type-select" required>
+            <option value="" disabled selected></option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+
+        <label>
+          <input type="email" name="email" required>
+          <span>Email</span>
+        </label>
+
+        <label>
+          <input type="password" name="password" required>
+          <span>Password</span>
+        </label>
+        <label>
+          <input type="password" name="confirm_password" required>
+          <span>Confirm Password</span>
+        </label>
+      </div>
+      
+      <button class="submit" type="submit">Submit</button>
+      <p class="signin">
+        Already have an Account?
+        <a href="{{ url_for('login') }}">Signin</a>
+      </p>
+    </form>
+  </section>
+
+  <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive elements effect
+        const interactiveElements = document.querySelectorAll('a, button, input, select, .submit');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.classList.remove('active');
+            });
+            el.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+            el.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+        });
+  </script>
+  <script src="{{ url_for('static', filename='idk.js') }}"></script>
+</body>
+</html>

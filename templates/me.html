@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Us - MusicLab</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='me.css') }}">
+</head>
+<body>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <div class="logo">
+            <img src="static/logo1.png" alt="">
+        </div>
+ 
+        <div class="inner-main-nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active{% endif %}">HOME</a></li>
+                <li><a href="{{ url_for('view') }}" class="{% if request.path == url_for('view') %}active{% endif %}">GIGS</a></li>
+                <li><a href="{{ url_for('colab') }}" class="{% if request.path == url_for('colab') %}active{% endif %}">COLLAB</a></li>
+                <li><a href="{{ url_for('me') }}" class="{% if request.path == url_for('me') %}active{% endif %}">ME</a></li>
+                <li><a href="{{ url_for('about') }}" class="{% if request.path == url_for('about') %}active{% endif %}">ABOUT</a></li>
+                <li><a href="{{ url_for('feedback') }}" class="{% if request.path == url_for('feedback') %}active{% endif %}">FEEDBACK</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <h1>Welcome, {{ user.name }}!</h1>
+    <section class="profile">
+        <div class="profile-box">
+            <!-- Left half: User Details -->
+            <div class="left-half">
+                <h2>User Details</h2>
+                <p><strong>Name:</strong> {{ user.name }}</p>
+                <p><strong>Type:</strong> {{ user.type }}</p>
+                <p><strong>Genre:</strong> {{ user.genre }}</p>
+                <p><strong>Instrument:</strong> {{ user.instrument }}</p>
+            </div>
+
+            <!-- Right half: Divided into Upper (Gigs) and Lower (Collaborations) -->
+            <div class="right-half">
+                <!-- Upper Half: Gigs -->
+                <div class="upper-half">
+                    <h2>Your Gigs</h2>
+                    <ul>
+                        {% for gig in gigs %}
+                        <li>
+                            <p><strong>Theme:</strong> {{ gig.theme }}</p>
+                            <p><strong>Venue:</strong> {{ gig.venue }}</p>
+                            <p><strong>Audience:</strong> {{ gig.audience }}</p>
+                            <form action="{{ url_for('delete_gig', gig_id=gig.id) }}" method="POST" class="delete-form">
+                                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this gig?')">Delete Gig</button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <p>No gigs uploaded yet.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Lower Half: Collaborations -->
+                <div class="lower-half">
+                    <h2>Your Collaborations</h2>
+                    <ul>
+                        {% for collaboration in collaborations %}
+                        <li>
+                            <h3>{{ collaboration.title }}</h3>
+                            <p><strong>Collaborator:</strong> {{ collaboration.collaborator }}</p>
+                            <p><strong>Description:</strong> {{ collaboration.description }}</p>
+                            {% if collaboration.img %}
+                            <img src="{{ collaboration.img }}" alt="Collaboration Image" class="collab-img">
+                            {% endif %}
+                        </li>
+                        {% else %}
+                        <p>No collaborations uploaded yet.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout">Log out</a>
+    </section>
+
+    <script>
+        // Custom Cursor Script
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        // Cursor effects on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .delete-btn, input[type="submit"], .logout');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.classList.add('active');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.classList.remove('active');
+            });
+            
+            el.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+            
+            el.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+        });
+    </script>
+</body>
+</html>

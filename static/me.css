@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+/* Header/Navbar Styles */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.inner-main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.inner-main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.inner-main-nav a:hover {
+    color: #e74c3c;
+}
+
+.inner-main-nav a.active {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Main Content Styles */
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0 30px;
+    color: #333;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+/* Profile Section */
+.profile {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.profile-box {
+    width: 90%;
+    max-width: 1200px;
+    min-height: 600px;
+    display: flex;
+    gap: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    background-color: #fff;
+}
+
+/* Left Column - User Details */
+.left-half {
+    flex: 1;
+    padding: 20px;
+}
+
+.left-half h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    color: #333;
+}
+
+.left-half p {
+    margin-bottom: 22px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.left-half p strong {
+    display: inline-block;
+    width: 100px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Right Column - Gigs & Collaborations */
+.right-half {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.upper-half, .lower-half {
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.upper-half h2, .lower-half h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    color: #333;
+}
+
+/* List Items */
+ul {
+    list-style: none;
+}
+
+.upper-half ul, .lower-half ul {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.upper-half ul li, .lower-half ul li {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.upper-half ul li p, .lower-half ul li p {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.upper-half ul li p strong, .lower-half ul li p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.lower-half ul li h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.collab-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logout Button */
+.logout {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== CUSTOM CURSOR ========== */
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(190, 29, 29, 0.7);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(190, 29, 29, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cursor.active, 
+.cursor-follower.active {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(236, 192, 203, 0.5);
+}
+
+.cursor.click {
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: rgba(74, 43, 10, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .profile-box {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .left-half, .right-half {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+    }
+    
+    .inner-main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .profile-box {
+        width: 95%;
+        padding: 25px;
+    }
+    
+    .left-half p strong {
+        width: auto;
+        display: inline;
+        margin-right: 10px;
+    }
+    
+    /* Keep cursor hidden on mobile */
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    * {
+        cursor: default !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .upper-half, .lower-half {
+        padding: 20px 15px;
+    }
+    
+    .upper-half ul li, .lower-half ul li {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logout {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.delete-form {
+    margin-top: 15px;
+}

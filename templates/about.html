@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Us - MusicLab</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css') }}">
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="MusicLab Logo">
+        </div>
+
+        <div class="inner-main-nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active{% endif %}">HOME</a></li>
+                <li><a href="{{ url_for('view') }}" class="{% if request.path == url_for('view') %}active{% endif %}">GIGS</a></li>
+                <li><a href="{{ url_for('colab') }}" class="{% if request.path == url_for('colab') %}active{% endif %}">COLLAB</a></li>
+                <li><a href="{{ url_for('me') }}" class="{% if request.path == url_for('me') %}active{% endif %}">ME</a></li>
+                <li><a href="{{ url_for('about') }}" class="{% if request.path == url_for('about') %}active{% endif %}">ABOUT</a></li>
+                <li><a href="{{ url_for('contactus') }}" class="{% if request.path == url_for('contactus') %}active{% endif %}">Con</a></li>
+                
+                {% if 'email' in session %}
+                    <li><a href="{{ url_for('logout') }}" class="{% if request.path == url_for('logout') %}active{% endif %}">LOGOUT</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="{% if request.path == url_for('login') %}active{% endif %}">LOGIN</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </header>
+
+    <main>
+        <!-- About Us Section -->
+        <div class="about-section">
+            <h2>About Us</h2>
+            <p>MusicLab is a creative space for musicians, producers, and artists alike. We provide professional music production services, organize live gigs, and foster collaborations between talented individuals to create exceptional music. Whether you are looking to fine-tune your sound or find the perfect partner for your next project, MusicLab has the resources and expertise to help bring your musical vision to life.</p>
+        </div>
+
+        <div class="services-container">
+            <h1>Our Services</h1>
+            <div class="service-boxes">
+                <div class="service-box">
+                    <img src="static/prof.png" alt="Artist Profile">
+                    <h3>Artist Profile</h3>
+                    <p>Create your artist profile, and find yourself opportunities to showcase your talent.</p>
+                </div>
+                <div class="service-box">
+                    <img src="static/perf.png" alt="Find Gigs">
+                    <h3>Find Gigs</h3>
+                    <p>We help you find gigs best suitable for you</p>
+                </div>
+                <div class="service-box">
+                    <img src="static/cola.png" alt="Collaboration">
+                    <h3>Collaboration</h3>
+                    <p>Collaborate with talented artists to create something unique and amazing.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for toggling the dropdown menu visibility
+        function toggleMenu() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('show');
+        }
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive elements effect
+        const interactiveElements = document.querySelectorAll('a, button, .service-box, .dropdown-item');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

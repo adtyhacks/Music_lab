@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicLab</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='hire.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <style>
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(190, 29, 29, 0.7);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(190, 29, 29, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor.active, 
+        .cursor-follower.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(236, 192, 203, 0.5);
+        }
+
+        .cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: rgba(74, 43, 10, 0.8);
+        }
+
+        /* Hide cursor on mobile */
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            * {
+                cursor: default !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Go Back Button fixed at the top left -->
+    <a href="javascript:history.back()" class="go-back-btn">Go Back</a>
+
+    {% if 'email' not in session %}
+        <!-- If user is not logged in, display options to login or go back -->
+        <div class="login-prompt">
+            <p>Please <a href="{{ url_for('login') }}">log in</a> to upload a gig.</p>
+        </div>
+        
+    {% else %}
+        <!-- If user is logged in, display the form to upload gigs -->
+        <form autocomplete="off" class="form" id="gigForm" method="POST" action="{{ url_for('hire') }}" enctype="multipart/form-data">
+            <p class="title">Upload Gigs</p>
+            <div class="form-group">
+                <label>
+                    <input type="text" name="theme" placeholder="Theme of the event" required>
+                </label>
+                <label>
+                    <input type="text" name="genre" placeholder="Genre of music" required>
+                </label>
+                <label>
+                    <input type="number" name="audience" min="1" placeholder="Audience capacity" required>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="text" name="venue" placeholder="Venue" required>
+                </label>
+                <label>
+                    <input type="file" name="img1">
+                </label>
+                <label>
+                    <input type="file" name="img2">
+                </label>
+            </div>
+        
+            <button class="submit" type="submit">Submit</button>
+            <p class="signin">view gigs?
+                <a href="{{ url_for('view') }}" class="view">Gigs</a>
+            </p>
+        </form>
+    {% endif %}
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive elements effect
+        const interactiveElements = document.querySelectorAll('a, button, input, .submit, .view');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.classList.remove('active');
+            });
+            el.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+            el.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+        });
+    </script>
+</body>
+</html>

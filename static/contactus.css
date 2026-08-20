@@ -1,0 +1,146 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, #ffb3cc, #c9c9ff); /* Pastel gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.contact-container {
+    display: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Maximum width for the container */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Header Section */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+header p {
+    color: #777;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Contact Box */
+.contact-box {
+    display: center;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 120%; /* Adjust width for a larger box */
+    max-width:700px; /* You can adjust this max-width for the desired box width */
+}
+
+/* Hover Effect for Box */
+.contact-box:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Section */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input, textarea {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Textarea Color Adjustments */
+textarea {
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for the textarea */
+    color: #333; /* Dark text color for readability */
+}
+
+input:focus, textarea:focus {
+    border-color: #ff6a00;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #ff6a00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ee0979;
+}
+
+/* Footer Section */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .contact-box {
+        padding: 20px;
+    }
+
+    form input, form textarea {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+li, a, button {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #19aedf;
+    text-decoration: none;
+}
+
+.lg1 {
+    font-weight: 1000;
+    font-size: 1.5rem;
+    color: #ecc0cb;
+}
+
+/* Body setup for centering the form */
+body {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: 100vh;            /* Full viewport height */
+    background-color: #f4f4f4; /* Optional background color */
+    margin: 0;                /* Remove default margin */
+}
+
+/* Form styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 800px;
+    height: 500px;
+    background: rgba(169, 169, 169, 0.2);  /* Changed to a grey color */
+    backdrop-filter: blur(25px);
+    padding: 34px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+  font-size: 28px;
+  color:#000;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  margin-bottom: 35px; /* Reduced gap between title and form box */
+}
+
+.form-group {
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.form input {
+    width: 100%;
+    height: 50%;
+    padding: 15px;  /* Increased padding for larger input boxes */
+    font-size: 16px;  /* Increase text size */
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+}
+
+.form label {
+    flex: 1;
+    position: relative;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border-radius: 10px;
+    color: #000;
+    font-size: 16px;
+    transform: 0.3s ease;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.submit:hover {
+    background: rgba(0,0,0,0.25);
+}
+.view {
+    display: inline-block;
+    color: rgb(128, 38, 232);   /* Text color */
+    font-size: 16px;            /* Font size */
+    text-align: center;         /* Center text */
+    text-decoration: none;      /* Remove underline */
+    border-radius: 1px;         /* Rounded corners */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+}
+.view:hover {
+    color: #300842;             /* Change text color on hover */
+}
+/* Remove margin from the <p> tag to reduce the gap between the text and button */
+.signin {
+    margin-bottom: 0;           /* Remove bottom margin to reduce gap */
+}
+/* General body styling */
+/* General body styling */
+/* General body styling */
+body {
+    position: relative;
+}
+
+/* Pop-up modal styling */
+
+/* Go Back Button Styling */
+.go-back-btn {
+    position: absolute;
+    top: 20px;      /* Adjusts distance from the top */
+    left: 20px;     /* Adjusts distance from the left */
+    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.go-back-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+.login-prompt a:hover {
+    color: #300842; /* Darker red color on hover */
+   
+}
+
+/* ========== CUSTOM CURSOR ========== */
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(190, 29, 29, 0.7);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(190, 29, 29, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cursor.active, 
+.cursor-follower.active {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(236, 192, 203, 0.5);
+}
+
+.cursor.click {
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: rgba(74, 43, 10, 0.8);
+}
+
+/* Hide cursor on mobile */
+@media (max-width: 768px) {
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    * {
+        cursor: default !important;
+    }
+}

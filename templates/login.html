@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(190, 29, 29, 0.7);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(190, 29, 29, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor.active, 
+        .cursor-follower.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(236, 192, 203, 0.5);
+        }
+
+        .cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: rgba(74, 43, 10, 0.8);
+        }
+
+        /* Hide cursor on mobile */
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            * {
+                cursor: default !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="{{ url_for('login') }}" method="POST">
+                    <h2>Login</h2>
+                    <div class="input-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/893/893247.png" alt="email" width="6%">
+                        <input type="email" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3427/3427189.png" alt="password" width="6%">
+                        <input type="password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="forgot">
+                        <label for="remember"><input type="checkbox" name="remember">Remember Me! <a href="{{ url_for('forgetpass') }}">Forgot Password?</a></label>
+                    </div>
+                    <button class="raise-this" type="submit">Log in</button>
+                    <div class="register">
+                        <p>Don't have an Account? <a href="{{ url_for('register') }}">Sign up here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive elements effect
+        const interactiveElements = document.querySelectorAll('a, button, input, .raise-this');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.classList.remove('active');
+            });
+            el.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+            el.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+        });
+    </script>
+</body>
+</html>
